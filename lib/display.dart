@@ -12,7 +12,7 @@ class display extends StatefulWidget {
 class _displayState extends State<display> {
   final CollectionReference bd= FirebaseFirestore.instance.collection('blood donation');
 
-  TextEditingController _lecontroller=TextEditingController();
+  // TextEditingController _lecontroller=TextEditingController();
   TextEditingController _ticontroller=TextEditingController();
   TextEditingController _subcontroller=TextEditingController();
 
@@ -33,10 +33,17 @@ class _displayState extends State<display> {
                 return Card(
                   child: ListTile(
                     tileColor: Colors.cyanAccent,
-                    leading: Text(snap['Group']),
+                    leading: CircleAvatar(
+                        backgroundColor:Colors.red,
+                        radius: 30,
+                        child: Text(
+                          snap['Group'],
+                          style: TextStyle(fontSize: 20,color: Colors.black),
+                        )),
                     title: Text(snap['Name']),
                     subtitle: Text(snap['Phone']),
                     trailing: Container(
+                      width: 90,
                       child: Row(
                         children: [
                           IconButton(

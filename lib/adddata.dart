@@ -11,8 +11,21 @@ class adddata extends StatefulWidget {
 }
 
 class _adddataState extends State<adddata> {
-  
-  TextEditingController _lecontroller=TextEditingController();
+
+  final bloodgroup =[
+    '',
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'AB+',
+    'AB-',
+  ];
+  late String selectedgroup;
+
+  // TextEditingController _lecontroller=TextEditingController();
   TextEditingController _ticontroller=TextEditingController();
   TextEditingController _subtcontroller=TextEditingController();
   
@@ -28,20 +41,14 @@ class _adddataState extends State<adddata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Donor'),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
-              controller: _lecontroller,
-              decoration: InputDecoration(
-                hintText: 'Type',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10)
-              )
-            ),
-            ),
-            padd,
             TextField(
               controller: _ticontroller,
               decoration: InputDecoration(
@@ -62,9 +69,26 @@ class _adddataState extends State<adddata> {
             ),
             ),
             padd,
+            DropdownButtonFormField(
+              decoration: InputDecoration(
+                hintText: 'Group'
+              ),
+                items: bloodgroup.map((e) => DropdownMenuItem(
+                    child: Text(e),
+                  value: e,
+                ))
+                .toList(),
+                onChanged:(val) {
+                selectedgroup= val!;
+                }
+            ),
+            padd,
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red
+                ),
                 onPressed: (){
-                  add(_lecontroller.text, _ticontroller.text, _subtcontroller.text);
+                  add( selectedgroup, _ticontroller.text, _subtcontroller.text);
                   Navigator.pop(context);
                 },
                 child: Text('save'))

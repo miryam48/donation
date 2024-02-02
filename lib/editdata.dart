@@ -11,15 +11,29 @@ class editdata extends StatefulWidget {
 }
 
 class _editdataState extends State<editdata> {
+
+  final bloodgroup =[
+    '',
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'AB+',
+    'AB-',
+  ];
+  late String selectedgroup;
+
   final CollectionReference bd=FirebaseFirestore.instance.collection('blood donation');
 
-  TextEditingController _lecontroller=TextEditingController();
+  // TextEditingController _lecontroller=TextEditingController();
   TextEditingController _ticontroller=TextEditingController();
   TextEditingController _subtcontroller=TextEditingController();
 
   void update(docid){
     final data={
-      'Group':_lecontroller.text,
+      'Group':selectedgroup,
       'Name':_ticontroller.text,
       'Phone':_subtcontroller.text
     };
@@ -29,7 +43,7 @@ class _editdataState extends State<editdata> {
   @override
   Widget build(BuildContext context) {
     final args= ModalRoute.of(context)!.settings.arguments as Map;
-    _lecontroller.text=args['Group'];
+    selectedgroup=args['Group'];
     _ticontroller.text=args['Name'];
     _subtcontroller.text=args['Phone'];
 
@@ -40,16 +54,6 @@ class _editdataState extends State<editdata> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextField(
-              controller: _lecontroller,
-              decoration: InputDecoration(
-                  hintText: 'Type',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  )
-              ),
-            ),
-            padd,
             TextField(
               controller: _ticontroller,
               decoration: InputDecoration(
@@ -68,6 +72,20 @@ class _editdataState extends State<editdata> {
                       borderRadius: BorderRadius.circular(10)
                   )
               ),
+            ),
+            padd,
+            DropdownButtonFormField(
+                decoration: InputDecoration(
+                    hintText: 'Group'
+                ),
+                items: bloodgroup.map((e) => DropdownMenuItem(
+                  child: Text(e),
+                  value: e,
+                ))
+                    .toList(),
+                onChanged:(val) {
+                  selectedgroup= val!;
+                }
             ),
             padd,
             ElevatedButton(

@@ -65,6 +65,8 @@ class _editdataState extends State<editdata> {
             ),
             padd,
             TextField(
+              maxLength: 10,
+              keyboardType: TextInputType.number,
               controller: _subtcontroller,
               decoration: InputDecoration(
                   hintText: 'Type Number',

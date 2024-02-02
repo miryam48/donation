@@ -60,11 +60,13 @@ class _adddataState extends State<adddata> {
             ),
             padd,
             TextField(
+              maxLength: 10,
+              keyboardType: TextInputType.number,
               controller: _subtcontroller,
               decoration: InputDecoration(
                 hintText: 'Type Number',
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(10),
                 )
             ),
             ),

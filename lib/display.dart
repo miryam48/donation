@@ -48,7 +48,8 @@ class _displayState extends State<display> {
                         children: [
                           IconButton(
                               onPressed: (){
-                                Navigator.pushNamed(context, 'edit', arguments:
+                                Navigator.pushNamed(context, 'edit',
+                                    arguments:
                                 {
                                 'Group': snap['Group'],
                                 'Name': snap['Name'],

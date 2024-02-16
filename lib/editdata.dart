@@ -78,7 +78,7 @@ class _editdataState extends State<editdata> {
             padd,
             DropdownButtonFormField(
                 decoration: InputDecoration(
-                    hintText: 'Group'
+                    hintText: selectedgroup
                 ),
                 items: bloodgroup.map((e) => DropdownMenuItem(
                   child: Text(e),
